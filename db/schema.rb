@@ -14,13 +14,17 @@
 ActiveRecord::Schema.define(version: 20160501215327) do
 
   create_table "loans", force: :cascade do |t|
-    t.decimal  "funded_amount", precision: 8, scale: 2
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.string   "payments"
+    t.decimal  "funded_amount",       precision: 8, scale: 2
+    t.decimal  "outstanding_balance"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
-# Could not dump table "payments" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "payments", force: :cascade do |t|
+    t.integer "loan_id"
+    t.decimal "amount"
+    t.string  "currency"
+    t.string  "date",     default: "2016-05-01"
+  end
 
 end

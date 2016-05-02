@@ -32,11 +32,27 @@ module API
             end
 
           end
-          # @loan
+          @loan
         end
 
-      end
+        # Display all payments for loan
+        segment '/:loan_id' do
+          get '/payments' do
+            @loan = Loan.find_by(id: params[:loan_id])
+            @loan.payments
+          end
+        end
 
+        # Display payment for loan by id
+        segment '/:loan_id' do
+          resource '/payments' do
+            get '/:id' do
+              @loan = Loan.find_by(id: params[:loan_id])
+              @payment = @loan.payments.find_by(id: params[:id])
+            end
+          end
+        end
+      end
     end
   end
 end
