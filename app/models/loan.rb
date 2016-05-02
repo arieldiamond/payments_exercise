@@ -12,15 +12,11 @@ class Loan < ActiveRecord::Base
 	def update_payment_and_balance(balance, params)
     payment = params[:payment].to_f
 		if payment != 0.0 && balance + payment <= funded_amount
-			p payment.to_f + balance.to_f
-			p funded_amount.to_f
-      payments << Payment.create(loan_id: id, amount: payment, currency: params[:currency] || 'USD' )
+      payments << Payment.create(loan_id: id, amount: payment)
       update(outstanding_balance: balance - payment)
-      loan = self
+      self
     else
-      loan = { error: "Your payment has exceeded your balance of #{balance}. Please try again with a lower amount."}
+      { error: "Your payment has exceeded your balance of #{balance}. Please try again with a lower amount."}
     end
-
-    return loan
 	end
 end
