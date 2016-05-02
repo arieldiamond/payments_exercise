@@ -15,16 +15,16 @@ ActiveRecord::Schema.define(version: 20160501215327) do
 
   create_table "loans", force: :cascade do |t|
     t.decimal  "funded_amount",       precision: 8, scale: 2
-    t.decimal  "outstanding_balance",                         default: 0.0
-    t.datetime "created_at",                                                null: false
-    t.datetime "updated_at",                                                null: false
+    t.decimal  "outstanding_balance"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   create_table "payments", force: :cascade do |t|
     t.integer "loan_id"
     t.decimal "amount"
     t.string  "currency"
-    t.string  "date",     default: "2016-05-01"
+    t.string  "date",     default: "2016-05-02"
   end
 
 end

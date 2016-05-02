@@ -13,12 +13,15 @@ module API
         desc 'Return a Loan'
         params do
           requires :id, type: String
+          optional :payment, type: String
+          optional :currency, type: String
         end
 
         get ':id', root: 'loan' do
           @loan = Loan.find_by(id: params[:id])
+          return @loan if params[:payment] == nil
           balance = @loan.calculate_balance
-          @loan.update_payment_and_balance(balance, params[:payment], params[:currency])
+          @loan.update_payment_and_balance(balance, params)
         end
 
         # Display all payments for loan
