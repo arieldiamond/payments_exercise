@@ -1,11 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Payment, type: :model do
-	let(:loan) {Loan.create!(funded_amount: 200.19)}
-
-  # Validations
-  it { expect(loan).to validate_presence_of(:funded_amount) }
-  it { expect(loan).to validate_numericality_of(:funded_amount) }
+RSpec.describe Loan, type: :model do
+	loan = Loan.create!(funded_amount: 200.19)
 
   # Associations
 	it "has many Payments" do
