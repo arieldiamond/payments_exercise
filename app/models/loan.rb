@@ -1,5 +1,7 @@
 class Loan < ActiveRecord::Base
-	validates :funded_amount, presence: true, numericality: true
+	validates :funded_amount, 
+		presence: true, 
+		numericality: true
 	
 	has_many :payments, dependent: :destroy
 
