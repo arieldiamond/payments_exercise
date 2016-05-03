@@ -11,7 +11,8 @@ class Loan < ActiveRecord::Base
 		outstanding_balance
 	end
 
-	def update_payment_and_balance(balance, params)
+	def update_payment_and_balance(params)
+		balance = calculate_balance
     payment = params[:payment].to_f
 		if payment != 0.0 && balance + payment <= funded_amount
       payments << Payment.create(loan_id: id, amount: payment)

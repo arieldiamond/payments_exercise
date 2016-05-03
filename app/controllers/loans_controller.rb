@@ -5,11 +5,6 @@ class LoansController < ApplicationController
   end
 
   def index
-  	Loan.all.each do |l|
-  		if l.outstanding_balance == nil
-  			l.update(outstanding_balance: l.funded_amount)
-  		end
-  	end
     render json: Loan.all
   end
 
@@ -18,8 +13,7 @@ class LoansController < ApplicationController
     if params[:payment] == nil
     	render json: @loan
     else
-    	balance = @loan.calculate_balance
-      render json: @loan.update_payment_and_balance(balance, params)
+      render json: @loan.update_payment_and_balance(params)
     end
   end
 end
